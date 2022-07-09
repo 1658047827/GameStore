@@ -1,0 +1,98 @@
+body {
+    background-color: #121212;
+}
+
+/* 主体 */
+.container .row #showImg {
+    width: 100%;
+    border-radius: 6px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.container .row .description {
+    color: #f4f4f4;
+    font-size: 20px;
+}
+
+.container .row .type {
+    margin-top: 50px;
+    border-left: 2px solid #2a2a2a;
+    margin-bottom: 10px;
+}
+
+.container .row .col-sm-8 .req {
+    background-color: #262626;
+    height: 550px;
+}
+
+/* 右侧 */
+#cart-sum h3 {
+    color: #f4f4f4;
+    margin-bottom: 10px;
+}
+
+#cart-sum div {
+    margin-top: 20px;
+    border-bottom: 1px solid #999;
+    font-size: 18px;
+    color: whitesmoke;
+}
+
+/* 按钮 */
+#cart-btn-1 {
+    margin: 10px 0;
+    width: 100%;
+}
+
+#cart-btn-2 {
+    margin: 10px 0;
+    width: 100%;
+}
+
+#cart-sum span p {
+    position: absolute;
+    bottom: 20px;
+    color: #9f9f9f;
+    background-color: rgba(0, 0, 0, 0.66);
+    width: 300px;
+    font-size: 30px;
+    text-align: center;
+}
+
+#cart-sum span{
+    transition: 0.5s;
+}
+
+#cart-sum span:hover{
+    box-shadow: 0 0 10px #fdfdfd;
+    transition: 0.3s;
+}
+
+/*  底部 */
+footer {
+    margin-top: 60px;
+    background-color: #202020 !important;
+    border-top: none !important;
+}
+
+footer .container .row div {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+footer .container div a {
+    color: #f4f4f4;
+}
+
+footer .container .row p {
+    color: #f4f4f4;
+    font-size: 14px;
+    display: inline-block;
+}
+
+footer .container .row i {
+    margin: 5px 5px 0 5px;
+    color: #cbcbcb;
+}

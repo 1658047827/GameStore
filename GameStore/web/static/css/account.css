@@ -1,0 +1,83 @@
+body {
+    background-color: #f7f7f7;
+}
+
+/* 主体 */
+.container .row .input-area{
+    display: inline-block;
+    margin-left: 40px;
+    margin-right: 10px;
+}
+.container .row .myBtn{
+    margin-left: 50px;
+}
+
+/* 游戏列表 */
+.container .row .panel .game-inf-box .game-img{
+    height: 88%;
+    width: 90px;
+    border-radius: 5px;
+    margin-left: 10px;
+    margin-top: 6px;
+}
+
+.container .row .panel .game-inf-box i{
+    display: inline-block;
+    position: relative;
+    left: 30px;
+    top: 30px;
+}
+
+.container .row .panel .game-inf-box{
+    border: 2px #ededed solid;
+    height: 150px;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    margin: 15px 10px 15px 45px;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+.container .row .panel .game-inf-box:hover{
+    background-color: #d3d3d3;
+    transition: 0.5s;
+}
+
+.container .row .panel .game-inf-box p{
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.container .row .panel .game-inf-box svg{
+    position: absolute;
+    right: 20px;
+    top: 47px;
+}
+
+    /*  底部 */
+footer {
+    margin-top: 60px;
+    background-color: #202020 !important;
+    border-top: none !important;
+}
+
+footer .container .row div {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+footer .container div a {
+    color: #f4f4f4;
+}
+
+footer .container .row p {
+    color: #f4f4f4;
+    font-size: 14px;
+    display: inline-block;
+}
+
+footer .container .row i {
+    margin: 5px 5px 0 5px;
+    color: #cbcbcb;
+}

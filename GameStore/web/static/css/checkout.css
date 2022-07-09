@@ -1,0 +1,148 @@
+body {
+    background-color: rgba(18, 18, 18, 0.11);
+}
+
+/* 账单主体 */
+main h1 {
+    font-size: 30px;
+    color: #f4f4f4;
+    margin-bottom: 50px;
+}
+
+main > div .panel {
+    margin-top: 45px;
+    height: 850px;
+}
+
+main .col-sm-8 .panel .panel-heading {
+    background-color: #fdfdfd;
+}
+
+main .col-sm-4 .panel .panel-heading {
+    background-color: #f1f1f1;
+}
+
+main .col-sm-4 .panel {
+    background-color: #f1f1f1;
+}
+
+#order-list {
+    height: 690px;
+    overflow: scroll;
+}
+
+ul {
+    list-style-type: none;
+    margin: 10px 0 0 0;
+    padding: 0;
+}
+
+.cart-li {
+    /*border: 1px solid white;*/
+    background-color: transparent;
+    height: 110px;
+    border-radius: 12px;
+    /*margin-bottom: 10px;*/
+    /*line-height: 175px;*/
+}
+
+.cart-li img {
+    display: inline-block;
+    height: 75%;
+    border-radius: 7px;
+    border: none;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.cart-li div {
+    color: #eeeeee;
+    font-size: 20px;
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+}
+
+.cart-li > div > p {
+    margin: 27px 0 0 0;
+    color: #0f0f0f;
+}
+
+.cart-li > div > i {
+    font-size: 14px;
+    color: #0f0f0f;
+}
+
+/* 账单左侧 */
+.container .pay-method-box {
+    height: 90px;
+    margin: 10px 10px 20px 10px;
+    /*display: block;*/
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    vertical-align: middle;
+}
+
+.container .pay-method-box input {
+    display: inline-block;
+    margin-top: 35px;
+    width: 60px;
+    height: 20px;
+}
+
+.container .pay-method-box img {
+    width: 100px;
+    height: 60px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.container .pay-method-box p {
+    margin-left: 20px;
+    display: inline-block;
+    font-size: 20px;
+}
+
+/* check-box底部 */
+#check-box {
+    width: 100%;
+    height: 107px;
+    background-color: rgb(240, 240, 240);
+    box-shadow: 0 -7px 9px -7px #5E5E5E;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#check-box span {
+    font-size: 20px;
+    line-height: 107px;
+    margin-left: 20px;
+}
+
+/* 支付方式底部 */
+body .btns-box {
+    width: 100%;
+    height: 150px;
+    margin-top: 288px;
+    background-color: rgb(240, 240, 240);
+    box-shadow: 0 -7px 9px -7px #5E5E5E;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.btns-box p {
+    display: inline-block;
+    margin: 30px 30px 30px 50px;
+}
+
+.btns-box .btn {
+    width: 250px;
+    height: 50px;
+    margin: 0 10px 0 70px;
+}
+
+
+
+

@@ -1,0 +1,32 @@
+body {
+    background-color: #f7f7f7;
+}
+
+/*  底部 */
+footer {
+    margin-top: 60px;
+    background-color: #202020 !important;
+    border-top: none !important;
+}
+
+footer .container .row div {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+footer .container div a {
+    color: #f4f4f4;
+}
+
+footer .container .row p {
+    color: #f4f4f4;
+    font-size: 14px;
+    display: inline-block;
+}
+
+footer .container .row i {
+    margin: 5px 5px 0 5px;
+    color: #cbcbcb;
+}
+
