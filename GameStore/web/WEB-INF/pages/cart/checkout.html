@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>GameStore下单</title>
+
+    <!-- font-awesome矢量图标库 -->
+    <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" th:href="@{/static/bootstrap3/css/bootstrap.css}">
+
+    <!-- animate.css动画库 -->
+    <link rel="stylesheet" th:href="@{/static/animate_css/animate_4.1.1_.css}"/>
+
+    <!-- 自己写的css -->
+    <link rel="stylesheet" th:href="@{/static/css/checkout.css}">
+
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script th:src="@{/static/jQuery/jquery.min.js}"></script>
+
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script th:src="@{/static/bootstrap3/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+<!-- 结算界面主体 -->
+<main class="container">
+    <div class="col-sm-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">支付方式 <i class="fa fa-credit-card-alt"></i></div>
+            <div class="panel-body">
+                <ul class="">
+                    <li class="pay-method-box" th:label="1">
+                        <input type="radio" name="payMethod" id="1" checked>
+                        <img th:src="@{/static/uploads/zhifubao.webp}">
+                        <p>支付宝</p>
+                    </li>
+                    <li class="pay-method-box">
+                        <input type="radio" name="payMethod" id="2">
+                        <img th:src="@{/static/uploads/weixinzhifu.webp}">
+                        <p>微信支付</p>
+                    </li>
+                    <li class="pay-method-box">
+                        <input type="radio" name="payMethod" id="3">
+                        <img th:src="@{/static/uploads/paypal.webp}">
+                        <p>Paypal</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="btns-box">
+                <p>点击"结算"按钮，即代表我已满 18 岁，是此付款方式的认证拥有者，并且我同意 <a href="#">最终用户授权协议</a>。</p>
+                <button class="btn btn-default" th:onclick="cancel()">取消</button>
+                <button class="btn btn-primary" th:onclick="checkOut()">结算</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4" style="padding-left: 0 !important;">
+        <div class="panel panel-default">
+            <div class="panel-heading">订单详情 <i class="fa fa-sticky-note"></i></div>
+            <ul class="panel-body" id="order-list" >
+                <li class="cart-li" th:each="cartItem:${session.cart.getCartItemList()}">
+                    <img class="col-sm-2" th:src="@{'/static/uploads/'+${cartItem.gameEntity.gameImg}}">
+                    <div class="col-sm-8">
+                        <p th:text="${cartItem.getGameEntity().getGameName()}">Dark Souls III</p>
+                        <i class="price" th:text="${cartItem.getGameEntity().getPrice()}+'元'">299元</i>
+                    </div>
+                </li>
+            </ul>
+            <div id="check-box">
+                <i class="fa fa-cny"></i>
+                <span th:text="'总金额：'+${session.cart.totalMoney}+'元'"> 总金额：0元</span>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    function cancel(){
+        history.go(-1)
+    }
+
+    function checkOut(){
+        window.location.href='order?createOrder='+1;
+    }
+</script>
+
+</body>
+</html>

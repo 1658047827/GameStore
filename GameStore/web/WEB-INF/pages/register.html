@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>GameStore注册</title>
+
+    <!-- font-awesome矢量图标库 -->
+    <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" th:href="@{/static/bootstrap3/css/bootstrap.css}">
+
+    <!-- animate.css动画库 -->
+    <link rel="stylesheet" th:href="@{/static/animate_css/animate_4.1.1_.css}"/>
+
+    <!-- 自己写的css -->
+    <link rel="stylesheet" th:href="@{/static/css/register.css}">
+
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script th:src="@{/static/jQuery/jquery.min.js}"></script>
+
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script th:src="@{/static/bootstrap3/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6 animate__animated animate__fadeInDown">
+            <form id="login-box" th:action="@{/register.do}" method="post" onsubmit="return beforeSubmit(this)">
+                <i class="fa fa-gamepad fa-3x" id="login-gamepad"></i>
+                <h1>注册</h1>
+                <div class="form">
+                    <input type="text" placeholder="  username" name="username" maxlength="30">
+                    <input type="email" placeholder="  email" name="email" maxlength="30">
+                    <input type="password" placeholder="  password" name="password" maxlength="30">
+                    <input type="password" placeholder="  confirmPassword" name="password2" maxlength="30">
+                </div>
+                <input class="btn btn-primary my-btn-log" type="submit" value="提交">
+                <p class="line">已有GameStore账户?&nbsp;&nbsp;<a th:href="@{/login.do(tologin=1)}">登录</a></p>
+            </form>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    function beforeSubmit(form) {
+        if (form.username.value == '') {
+            alert('用户名不能为空！');
+            form.username.focus();
+            return false;
+        }
+        if (form.email.value == '') {
+            alert('邮箱不能为空！');
+            form.email.focus();
+            return false;
+        }
+        if (form.password.value == '') {
+            alert('密码不能为空！');
+            form.password.focus();
+            return false;
+        }
+        if (form.password.value.length < 6) {
+            alert('密码至少为6位，请重新输入！');
+            form.password.focus();
+            return false;
+        }
+        if (form.password.value != form.password2.value) {
+            alert('你两次输入的密码不一致，请重新输入！');
+            form.password2.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+
+</html>

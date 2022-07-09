@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>GameStore搜索结果</title>
+
+    <!-- font-awesome矢量图标库 -->
+    <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" th:href="@{/static/bootstrap3/css/bootstrap.css}">
+
+    <!-- animate.css动画库 -->
+    <link rel="stylesheet" th:href="@{/static/animate_css/animate_4.1.1_.css}"/>
+
+    <!-- 自己写的css -->
+    <link rel="stylesheet" th:href="@{/static/css/index.css}">
+
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script th:src="@{/static/jQuery/jquery.min.js}"></script>
+
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script th:src="@{/static/bootstrap3/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+<!-- 导航栏 -->
+<div th:replace="index :: myNavbar"></div>
+<br><br><br>
+
+<div class="page-header" style="border-bottom: solid #333333"></div>
+
+<!-- 主体内容 -->
+<main class="container">
+    <p style="font-size: 22px; color: #f3f3f3; display: inline-block;">搜索结果</p>
+    <div class="row" style="height: 690px">
+        <div class="col-sm-2 index-item" th:each="game:${session.gameList}">
+            <img th:src="@{'/static/uploads/'+${game.gameImg}}">
+            <span class="animate__animated">
+                <p th:text="${game.gameName}" class="name">黑暗之魂3</p>
+                <p th:text="${game.price}+'元'" class="price">100元</p>
+                <p th:text="'销售量：'+${game.saleCount}" class="sale">销售量：1000</p>
+                <button class="btn btn-primary" th:onclick="showGameDetail([[${game.id}]])">
+                    <i class="fa fa-search fa-lg"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+</main>
+
+<script>
+    function showGameDetail(gameId) {
+        window.location.href = 'game?showDetail=' + 1 + '&gameId=' + gameId;
+    }
+</script>
+
+<!-- 底部 -->
+<footer th:replace="index :: myFooter"></footer>
+
+</body>
+</html>

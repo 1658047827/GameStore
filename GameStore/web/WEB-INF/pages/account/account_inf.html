@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>GameStore账户信息</title>
+
+    <!-- font-awesome矢量图标库 -->
+    <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" th:href="@{/static/bootstrap3/css/bootstrap.css}">
+
+    <!-- animate.css动画库 -->
+    <link rel="stylesheet" th:href="@{/static/animate_css/animate_4.1.1_.css}"/>
+
+    <!-- 自己写的css -->
+    <link rel="stylesheet" th:href="@{/static/css/account.css}">
+
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script th:src="@{/static/jQuery/jquery.min.js}"></script>
+
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script th:src="@{/static/bootstrap3/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+<!-- 导航栏 -->
+<div th:replace="index :: myNavbar"></div>
+<br><br><br><br>
+
+<!-- 主体 -->
+<div class="container" style="height: 700px">
+    <div class="row">
+        <div class="col-sm-3" id="left-pad">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" class="active"><a href="">
+                    <i class="fa fa-user"></i> 账户信息</a>
+                </li>
+                <li role="presentation" style="background-color: #fdfdfd;"><a th:href="@{/account(showOwnGame=1)}">
+                    <i class="fa fa-gamepad"></i> 拥有的游戏</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-9">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">账户信息</h3>
+                </div>
+                <div class="panel-body">
+                    <form th:action="@{/account(updateInf=1)}" style="padding: 0 20px 0 20px" th:method="post">
+                        <h3>基本信息</h3>
+                        <p>管理您的姓名和联系方式。这些个人信息为您的隐私，不会向其他用户显示。查看 <a href="#">隐私政策 </a><i class="fa fa-lock"></i></p>
+                        <br>
+                        <div class="input-area">
+                            用户名称：
+                            <input type="text" th:value="${session.loggedUserInf.getUname()}" name="newUsername">
+                        </div>
+                        <div class="input-area">
+                            用户邮箱：
+                            <input type="email" th:value="${session.loggedUserInf.getEmail()}" name="newEmail">
+                        </div>
+                        <button class="btn btn-success myBtn">提交修改</button>
+                    </form>
+                    <div class="page-header"></div>
+                    <form th:action="@{/account(updatePwd=1)}" style="padding: 0 20px 30px 20px" th:method="post">
+                        <h3>更改密码</h3>
+                        <br>
+                        <div class="input-area">
+                            旧密码：<input type="password" name="oldPwd">
+                        </div>
+                        <div class="input-area">
+                            新密码：<input type="password" name="newPwd">
+                        </div>
+                        <button class="btn btn-success myBtn">提交修改</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1">
+    <div class="modal-dialog" style="margin-top: 350px !important; width: 300px !important; ">
+        <div class="modal-content">
+            <div class="modal-header" style="text-align: center!important;">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel" th:switch="${#request.getAttribute('updatePwdRet')}">
+                    <p th:case="${'1'}">旧密码错误，修改失败</p>
+                    <p th:case="${'2'}">密码修改成功</p>
+                </h4>
+            </div>
+            <div class="modal-footer" style="text-align: center !important;">
+                <button class="btn btn-primary" style="width: 100px !important" data-dismiss="modal">
+                    确认
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<div class="modal fade" id="myModalTwo" tabindex="-1">
+    <div class="modal-dialog" style="margin-top: 350px !important; width: 300px !important; ">
+        <div class="modal-content">
+            <div class="modal-header" style="text-align: center!important;">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabelTwo" th:switch="${#request.getAttribute('updateInfRet')}">
+                    <p th:case="${'1'}">用户名已存在，修改失败</p>
+                    <p th:case="${'2'}">修改成功</p>
+                </h4>
+            </div>
+            <div class="modal-footer" style="text-align: center !important;">
+                <button class="btn btn-primary" style="width: 100px !important" data-dismiss="modal">
+                    确认
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 隐藏域 -->
+<input type="hidden" th:value="${#request.getAttribute('updatePwdRet')}" id="updatePwdRet">
+<input type="hidden" th:value="${#request.getAttribute('updateInfRet')}" id="updateInfRet">
+
+<script>
+    window.onload = function modalShow() {
+        var updatePwdRet = document.getElementById("updatePwdRet").value;
+        if (updatePwdRet != null && updatePwdRet != 0) {
+            $('#myModal').modal('show');
+        }
+
+        var updateInfRet = document.getElementById("updateInfRet").value;
+        if (updateInfRet != null && updateInfRet != 0) {
+            $('#myModalTwo').modal('show');
+        }
+    }
+</script>
+
+<!-- 底部 -->
+<footer th:replace="index :: myFooter"></footer>
+
+</body>
+</html>

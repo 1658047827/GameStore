@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>GameStore登录</title>
+
+    <!-- font-awesome矢量图标库 -->
+    <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" th:href="@{/static/bootstrap3/css/bootstrap.css}">
+
+    <!-- animate.css动画库 -->
+    <link rel="stylesheet" th:href="@{/static/animate_css/animate_4.1.1_.css}"/>
+
+    <!-- 自己写的css -->
+    <link rel="stylesheet" th:href="@{/static/css/login.css}">
+
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script th:src="@{/static/jQuery/jquery.min.js}"></script>
+
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script th:src="@{/static/bootstrap3/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6 animate__animated animate__fadeInDown">
+            <form id="login-box" th:action="@{/login.do}" method="post">
+                <i class="fa fa-gamepad fa-3x" id="login-gamepad"></i>
+                <h1>使用GameStore账户进行登录</h1>
+                <div class="form">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">
+                            <i class="fa fa-user-circle-o"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="username"
+                               aria-describedby="basic-addon1" name="username">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon2">
+                            <i class="fa fa-key"></i>
+                        </span>
+                        <input type="text" class="form-control"  placeholder="password"
+                               aria-describedby="basic-addon1" name="password">
+                    </div>
+                </div>
+                <input class="btn btn-primary my-btn-log" type="submit" name="submit" value="登录">
+                <p class="line">没有GameStore账户?&nbsp;&nbsp;<a th:href="@{/register.do(toreg=1)}">注册</a></p>
+            </form>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

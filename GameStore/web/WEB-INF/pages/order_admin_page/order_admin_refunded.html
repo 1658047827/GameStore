@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GameStore订单</title>
+
+    <!-- font-awesome矢量图标库 -->
+    <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" th:href="@{/static/bootstrap3/css/bootstrap.css}">
+
+    <!-- animate.css动画库 -->
+    <link rel="stylesheet" th:href="@{/static/animate_css/animate_4.1.1_.css}"/>
+
+    <!-- 自己写的css -->
+    <link rel="stylesheet" th:href="@{/static/css/myorders.css}">
+
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script th:src="@{/static/jQuery/jquery.min.js}"></script>
+
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script th:src="@{/static/bootstrap3/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+<!-- 导航栏 -->
+<div th:replace="index :: myNavbar"></div>
+<br><br><br><br>
+
+<div class="container">
+    <div class="row" style="height: 700px">
+        <div class="col-sm-3" id="left-pad">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" style="background-color: #fdfdfd;"><a th:href="@{/order(adminOrders=1)}">
+                    <i class="fa fa-clock-o"></i> 所有的正常订单</a>
+                </li>
+                <li role="presentation" style="background-color: #fdfdfd;"><a th:href="@{/order(adminRefundingOrders=1)}">
+                    <i class="fa fa-reply"></i> 所有申请退款订单</a>
+                </li>
+                <li role="presentation" class="active" ><a th:href="@{/order(adminRefundedOrders=1)}">
+                    <i class="fa fa-check-square-o"></i> 所有已退款订单</a>
+                </li>
+                <li role="presentation" style="background-color: #fdfdfd;">
+                    <a th:href="@{/account(op='getAllAccounts')}">
+                        <i class="fa fa-user-secret"></i> 所有用户信息
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">所有订单</div>
+
+                <!-- Table -->
+                <table class="table table-hover">
+                    <tr>
+                        <th><i class="fa fa-list-ul"></i> 订单编号</th>
+                        <th><i class="fa fa-calendar-check-o"></i> 下单日期</th>
+                        <th><i class="fa fa-rmb"></i> 总金额</th>
+                        <th><i class="fa fa-hourglass-half"></i> 订单状态</th>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(session.allRefundedOrderList)}">
+                        <td></td>
+                        <td>目前没有已退款的订单</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr th:unless="${#lists.isEmpty(session.allRefundedOrderList)}" th:each="order:${session.allRefundedOrderList}">
+                        <td>
+                            <a th:href="@{/order(orderDetail=1,orderNo=${order.getOrderNo()})}" th:text="${order.orderNo}"></a>
+                        </td>
+                        <td th:text="${order.orderDate}">123</td>
+                        <td th:text="${order.getOrderMoney()}+'元'">0元</td>
+                        <td th:switch="${order.orderStatus}">
+                            <p th:case="${0}">已付款</p>
+                            <p th:case="${1}">退款中</p>
+                            <p th:case="${2}">已退款</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- 底部 -->
+<footer th:replace="index :: myFooter"></footer>
+
+</body>
+</html>

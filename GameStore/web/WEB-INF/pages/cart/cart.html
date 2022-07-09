@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>GameStore购物车</title>
+
+    <!-- font-awesome矢量图标库 -->
+    <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" th:href="@{/static/bootstrap3/css/bootstrap.css}">
+
+    <!-- animate.css动画库 -->
+    <link rel="stylesheet" th:href="@{/static/animate_css/animate_4.1.1_.css}"/>
+
+    <!-- 自己写的css -->
+    <link rel="stylesheet" th:href="@{/static/css/cart.css}">
+
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script th:src="@{/static/jQuery/jquery.min.js}"></script>
+
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script th:src="@{/static/bootstrap3/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+<!--导航栏-->
+<div th:replace="index :: myNavbar"></div>
+<br><br><br>
+
+<!-- 购物车主体 -->
+<main class="container">
+    <div class="row" style="height: 690px">
+        <h1>我的购物车
+            <i class="fa fa-shopping-cart"></i>
+        </h1>
+        <div class="col-sm-8 animate__animated animate__fadeIn">
+            <ul th:if="${#lists.isEmpty(session.cart.cartItemList)}">
+                <li class="cart-li">
+                    <p style="line-height: 175px; font-size: 45px;text-align: center">您的购物车为空</p>
+                </li>
+            </ul>
+            <ul th:unless="${#lists.isEmpty(session.cart.cartItemList)}">
+                <li class="cart-li" th:each="cartItem:${session.cart.cartItemList}">
+                    <img class="col-sm-2" th:src="@{'/static/uploads/'+${cartItem.gameEntity.gameImg}}"
+                         th:onclick="showGameDetail([[${cartItem.getGame()}]])"
+                        style="cursor: pointer !important;">
+                    <div class="col-sm-6">
+                        <span class="label label-default">基础游戏</span>
+                        <p th:text="${cartItem.gameEntity.gameName}">
+                            Dark Souls III
+                        </p>
+                        <i class="fa fa-windows windows"></i>
+                    </div>
+                    <div class="col-sm-3">
+                        <br>
+                        <i th:text="${cartItem.gameEntity.price}+'元'" class="price">0元</i>
+                        <a th:href="@{/cart(deleteFromCart=1,cartId=${cartItem.id})}"><i class="fa fa-minus-circle"></i>
+                            从购物车移除</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- 右侧结算面板 -->
+        <div class="col-sm-4">
+            <div id="cart-sum">
+                <h3>游戏和应用概览</h3>
+                <p>总商品数:</p><i class="right" th:text="${session.cart.getTotalGameCount()}">0</i><br>
+                <p>特卖折扣</p><i class="right">0元</i><br>
+                <p>税费</p><i class="right">0元</i><br>
+                <div class="page-header"></div>
+                <p>总金额:</p><i class="right" th:text="${session.cart.totalMoney}+'元'">0元</i><br>
+                <button th:disabled="${session.cart.getTotalGameCount()==0}" class="btn btn-primary" id="cart-btn"
+                        th:onclick="toCheck()">
+                    下单
+                </button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    function toCheck() {
+        window.location.href = "order?op=toCheckPage";
+    }
+
+    function showGameDetail(gameId) {
+        window.location.href = 'game?showDetail=' + 1 + '&gameId=' + gameId;
+    }
+</script>
+
+<!-- 底部 -->
+<footer th:replace="index :: myFooter"></footer>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>GameStore订单详情</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" th:href="@{/static/bootstrap3/css/bootstrap.css}">
+
+    <!-- font-awesome矢量图标库 -->
+    <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}">
+
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script th:src="@{/static/jQuery/jquery.min.js}"></script>
+
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script th:src="@{/static/bootstrap3/js/bootstrap.min.js}"></script>
+
+    <style>
+        /*  底部 */
+        footer {
+            margin-top: 60px;
+            background-color: #202020 !important;
+            border-top: none !important;
+        }
+
+        footer .container .row div {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        footer .container div a {
+            color: #f4f4f4;
+        }
+
+        footer .container .row p {
+            color: #f4f4f4;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        footer .container .row i {
+            margin: 5px 5px 0 5px;
+            color: #cbcbcb;
+        }
+    </style>
+</head>
+<body>
+<!-- 导航栏 -->
+<div th:replace="index :: myNavbar"></div>
+<br><br><br><br>
+
+<div class="container">
+    <div class="row" style="height: 700px">
+        <h3>订单详情</h3>
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading" th:text="'订单号：'+${#request.getAttribute('orderNo')}">订单号：001</div>
+
+            <table class="table table-hover">
+                <tr>
+                    <th>游戏名称</th>
+                    <th>游戏公司</th>
+                    <th>游戏价格</th>
+                </tr>
+                <tr th:each="orderItem : ${session.detailedOrderList}">
+                    <td>
+                        <a th:href="@{/game(showDetail=1,gameId=${orderItem.getGame()})}"
+                           th:text="${orderItem.getGameEntity().getGameName()}"></a>
+                    </td>
+                    <td th:text="${orderItem.getGameEntity().getCompany()}"></td>
+                    <td th:text="${orderItem.getGameEntity().getPrice()}"></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<!-- footer -->
+<footer th:replace="index :: myFooter"></footer>
+</body>
+</html>
